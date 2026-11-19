@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import kitchenKing from '../assets/case-kitchenking.png';
+import summaz from '../assets/case-summaz.png';
+import chef from '../assets/case-chef.png';
+
+const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+
+const cases = [
+  { title: 'KitchenKing', tags: ['Marketing', 'Website', 'Brand Identity'], img: kitchenKing, body: lorem },
+  { title: 'Summaz Escape', tags: ['Marketing', 'Website'], img: summaz, body: lorem },
+  { title: 'Chef Dononvan Smith', tags: ['Marketing', 'Website', 'Website'], img: chef, body: lorem },
+];
+---
+
+<section class="work" id="work" data-nav-theme="dark-text">
+  <header class="work__head">
+    <h2 class="h-83 work__title" data-split-lines>
+      <span class="line-mask"><span>Some things we've</span></span>
+      <span class="line-mask"><span>been buzzing about.</span></span>
+    </h2>
+    <img class="work__logo" src="/assets/logo-pink.svg" width="64" height="64" alt="" data-spin-in />
+    <p class="work__intro" data-reveal="up">A few brands, websites, campaigns, and digital experiences we've helped make better.</p>
+  </header>
+
+  <ol class="work__list">
+    {cases.map((c, i) => (
+      <li class="case" data-case>
+        <a href="#" class="case__media" aria-label={`View ${c.title} case study`}>
+          <span class="case__clip" data-case-clip>
+            <span class="case__parallax" data-parallax-inner>
+              <Image src={c.img} alt="" widths={[600, 900, 1350, 1800]} sizes="(max-width: 1100px) 100vw, 47vw" class="case__img" />
+            </span>
+          </span>
+        </a>
+        <div class="case__meta">
+          <div>
+            <h3 class="case__title" data-reveal="up">{c.title}</h3>
+            <ul class="case__tags" data-stagger>
+              {c.tags.map((t) => <li class="tag">{t}</li>)}
+            </ul>
+          </div>
+          <p class="case__body" data-reveal="up">{c.body}</p>
+        </div>
+        {i < cases.length - 1 && <span class="case__rule" aria-hidden="true" />}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .work { padding: 20.2rem var(--gutter) 16rem; }
+
+  .work__head {
+    position: relative;
+    display: grid;
+    grid-template-columns: 105.4rem 1fr;
+    column-gap: 2.4rem;
+    align-items: end;
+  }
+  .work__title { width: 105.4rem; }
+  .work__logo {
+    position: absolute;
+    left: 85rem;
+    top: -4.2rem;
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+  .work__intro {
+    width: 46.2rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+    opacity: 0.6;
+    margin-bottom: 1.6rem;
+  }
+
+  .work__list { list-style: none; margin: 7.2rem 0 0; padding: 0; }
+
+  .case {
+    position: relative;
+    display: grid;
+    grid-template-columns: 90rem 74.6rem;
+    column-gap: 17.9rem;
+    margin-left: -0.1rem;
+  }
+  .case + .case { margin-top: 9.7rem; }
+
+  .case__media { display: block; height: 50.6rem; }
+  .case__clip {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.6rem;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+  .case__parallax { position: absolute; inset: -8% 0; display: block; will-change: transform; }
+  .case__parallax :global(.case__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+  .case__media:hover :global(.case__img) { transform: scale(1.06); }
+
+  .case__meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .case__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 4.3rem;
+    line-height: 4.8rem;
+    white-space: nowrap;
+  }
+  .case__tags {
+    list-style: none;
+    margin: 3.2rem 0 0;
+    padding: 0;
+    display: flex;
+    gap: 2.4rem;
+  }
+  .tag {
+    padding: 0.8rem 1.6rem;
+    border: 1px solid var(--tag-border);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: var(--tag-text);
+    white-space: nowrap;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .case:hover .tag { border-color: var(--pink); }
+  .tag:hover { background: var(--pink); color: var(--white); }
+
+  .case__body {
+    font-family: var(--font-body);
+    font-size: 2.2rem;
+    line-height: 1.2;
+    opacity: 0.6;
+  }
+
+  .case__rule {
+    position: absolute;
+    right: 0;
+    bottom: -4.8rem;
+    width: 74.6rem;
+    height: 1px;
+    background: var(--line);
+  }
+
+  @media (max-width: 1100px) {
+    .work { padding-top: 14rem; }
+    .work__head { grid-template-columns: 1fr; row-gap: 3rem; }
+    .work__title { width: auto; }
+    .work__logo { left: auto; right: 0; }
+    .work__intro { width: auto; max-width: 60rem; }
+    .case { grid-template-columns: 1fr; row-gap: 3rem; margin-left: 0; }
+    .case__media { height: auto; aspect-ratio: 900 / 506; }
+    .case__body { margin-top: 3rem; }
+    .case__rule { width: 100%; }
+  }
+  @media (max-width: 700px) {
+    .work__title { font-size: 5.6rem; }
+    .case__title { font-size: 3.6rem; white-space: normal; }
+    .case__tags { flex-wrap: wrap; gap: 1.2rem; margin-top: 2rem; }
+  }
+</style>

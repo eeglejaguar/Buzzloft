@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets';
+import grain from '../assets/texture-grain.png';
+
+const site = [
+  { label: 'Work', href: '#work' },
+  { label: 'Services', href: '#services' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+];
+const social = [
+  { label: 'Instagram', href: '#' },
+  { label: 'LinkedIn', href: '#' },
+  { label: '@Email', href: 'mailto:hello@buzzloft.com' },
+];
+---
+
+<footer class="footer" data-nav-theme="light-text">
+  <div class="footer__card" data-footer-card>
+    <div class="footer__grain" aria-hidden="true">
+      <Image src={grain} alt="" widths={[1200, 2000]} sizes="100vw" />
+    </div>
+
+    <h2 class="footer__title h-67" data-split-lines>
+      <span class="line-mask"><span>Making businesses look</span></span>
+      <span class="line-mask"><span>better. And work better.</span></span>
+    </h2>
+
+    <p class="footer__based" data-reveal="up">Based in the States. Working everywhere.</p>
+
+    <nav class="footer__links footer__links--site" aria-label="Footer">
+      {site.map((l) => <a href={l.href} class="footer__link" data-reveal="up">{l.label}</a>)}
+    </nav>
+    <nav class="footer__links footer__links--social" aria-label="Social">
+      {social.map((l) => <a href={l.href} class="footer__link" data-reveal="up">{l.label}</a>)}
+    </nav>
+
+    <p class="footer__copy">© 2026 Buzz Loft.</p>
+
+    <div class="wordmark" aria-label="Buzz Loft" role="img" data-wordmark>
+      <span class="wordmark__buzz" data-wm-part>Buzz</span>
+      <img class="wordmark__logo" src="/assets/wordmark-union.svg" width="227" height="233" alt="" data-wm-logo />
+      <span class="wordmark__loft" data-wm-part>Loft</span>
+    </div>
+  </div>
+
+  <div class="shapes" aria-hidden="true" data-shapes>
+    <span class="shape shape--1" data-shape><img src="/assets/footer-shape-1.svg" alt="" /></span>
+    <span class="shape shape--2" data-shape><img src="/assets/footer-shape-2.svg" alt="" /></span>
+    <span class="shape shape--3" data-shape><img src="/assets/footer-flower.svg" alt="" /></span>
+    <span class="shape shape--4" data-shape><img src="/assets/footer-mithosis.svg" alt="" /></span>
+    <span class="shape shape--5" data-shape><img src="/assets/footer-union.svg" alt="" /></span>
+  </div>
+</footer>
+
+<style>
+  .footer { position: relative; }
+  .footer__card {
+    position: relative;
+    height: 108rem;
+    border-radius: 4rem;
+    background: var(--pink);
+    color: var(--white);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .footer__grain { position: absolute; inset: 0; mix-blend-mode: soft-light; z-index: -1; }
+  .footer__grain :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .footer__title { position: absolute; left: var(--gutter); top: 12.9rem; width: 105.4rem; }
+  .footer__based {
+    position: absolute;
+    left: calc(58.33% + 0.6rem);
+    top: 25.3rem;
+    width: 59.2rem;
+    font-weight: 500;
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+  }
+  .footer__links {
+    position: absolute;
+    top: 35.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+  .footer__links--site { left: calc(58.33% + 0.6rem); }
+  .footer__links--social { left: calc(75% - 0.6rem); }
+  .footer__link, .footer__copy {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .footer__link { position: relative; width: max-content; }
+  .footer__link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -0.2rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .footer__link:hover::after { transform: scaleX(1); transform-origin: left; }
+  .footer__copy { position: absolute; right: var(--gutter); top: 71.3rem; }
+
+  /* Wordmark always scales with the viewport (1 --u = 1 Figma px at 1920 wide) */
+  .wordmark {
+    --u: calc(100vw / 1920);
+    position: absolute;
+    left: calc(50% - 3.85 * var(--u));
+    top: 68.4rem;
+    width: calc(1870.296 * var(--u));
+    height: calc(430 * var(--u));
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: calc(351.395 * var(--u));
+    line-height: normal;
+  }
+  .wordmark__buzz, .wordmark__loft { position: absolute; top: 0; white-space: nowrap; display: inline-block; will-change: transform; }
+  .wordmark__buzz { left: 0; }
+  .wordmark__loft { left: calc(50% + 259.43 * var(--u)); }
+  .wordmark__logo {
+    position: absolute;
+    left: calc(878.43 * var(--u));
+    top: calc(135.14 * var(--u));
+    width: calc(227.286 * var(--u));
+    height: calc(233.429 * var(--u));
+  }
+
+  /* Playful shapes under the card */
+  .shapes { position: relative; height: 60.7rem; overflow: hidden; }
+  .shape { position: absolute; display: flex; align-items: center; justify-content: center; will-change: transform; }
+  .shape img { flex: none; }
+  .shape--1 { left: -2.2rem; top: 35.1rem; width: 25.5968rem; height: 25.5968rem; }
+  .shape--1 img { width: 18.8rem; height: 18.8rem; transform: rotate(-29.31deg); }
+  .shape--2 { left: calc(8.33% + 1.8rem); top: 17.8rem; width: 42.8627rem; height: 42.8627rem; }
+  .shape--2 img { width: 34.3rem; height: 34.3rem; transform: rotate(17.08deg); }
+  .shape--3 { left: calc(25% + 6.9rem); top: 47.9rem; width: 11.5rem; height: 12.8rem; }
+  .shape--3 img { width: 100%; height: 100%; }
+  .shape--4 { left: calc(75% + 4.2rem); top: 41.9rem; width: 23.553rem; height: 19.4918rem; }
+  .shape--4 img { width: 20.5rem; height: 11.7rem; transform: rotate(-25.95deg); }
+  .shape--5 { left: calc(91.67% - 4.2rem); bottom: 0; width: 19.4rem; height: 19.6rem; }
+  .shape--5 img { width: 19.6rem; height: 19.4rem; transform: rotate(90deg); }
+
+  @media (max-width: 1100px) {
+    .footer__card { height: auto; padding: 10rem var(--gutter) 30vw; }
+    .footer__title, .footer__based, .footer__links, .footer__copy { position: static; width: auto; }
+    .footer__title { font-size: 5.6rem; }
+    .footer__based { margin-top: 6rem; }
+    .footer__links { margin-top: 4rem; }
+    .footer__copy { margin-top: 6rem; }
+    .wordmark { top: auto; bottom: calc(-20 * var(--u)); }
+    .shapes { height: 30rem; }
+  }
+  @media (min-width: 701px) and (max-width: 1100px) {
+    .footer__card { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4rem; }
+    .footer__title { grid-column: 1 / -1; }
+  }
+</style>

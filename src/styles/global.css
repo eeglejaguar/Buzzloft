@@ -1,0 +1,118 @@
+/*
+ * Buzz Loft — design tokens & base styles
+ * Design canvas is 1920px wide. On desktop 1rem = 10px @1920 and scales fluidly,
+ * so every Figma pixel value N is written as (N / 10)rem.
+ */
+
+/* Delight (secondary typeface from the Figma file) is a licensed font.
+   Drop Delight-Regular/Medium/Bold .woff2 files in /public/fonts to activate it.
+   Until then the stack falls back to Figtree, the closest free match. */
+@font-face {
+  font-family: 'Delight';
+  src: url('/fonts/Delight-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Delight';
+  src: url('/fonts/Delight-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Delight';
+  src: url('/fonts/Delight-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --pink: #ff2ca0;
+  --black: #1b1b1b;
+  --white: #ffffff;
+  --paper: #f4f5f0;
+  --line: #c2c2c2;
+  --tag-border: #eaeaea;
+  --tag-text: #606060;
+  --quote: #6b6b6b;
+
+  --font-display: 'Instrument Sans Variable', 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Delight', 'Figtree Variable', 'Figtree', system-ui, sans-serif;
+
+  --gutter: 4.8rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  font-size: calc(100vw / 192);
+}
+
+@media (max-width: 1100px) {
+  :root { font-size: calc(100vw / 120); }
+}
+@media (max-width: 700px) {
+  :root {
+    font-size: calc(100vw / 64);
+    --gutter: 2.6rem;
+  }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+/* Decorative layers (glow, flowers, tracks) intentionally bleed past the edges */
+main, footer { overflow-x: clip; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--black);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img, svg { display: block; max-width: none; }
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3, h4 { margin: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+.display { font-family: var(--font-display); text-transform: uppercase; }
+.label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  text-transform: uppercase;
+}
+
+/* Shared headline scales (Figma "Type@" styles) */
+.h-130 { font-family: var(--font-display); font-weight: 600; font-size: 13rem; line-height: 1; letter-spacing: -0.65rem; text-transform: uppercase; }
+.h-104 { font-family: var(--font-display); font-weight: 600; font-size: 10.4rem; line-height: 1.2; text-transform: uppercase; }
+.h-83  { font-family: var(--font-display); font-weight: 600; font-size: 8.3rem; line-height: 1.2; text-transform: uppercase; }
+.h-67  { font-family: var(--font-display); font-weight: 700; font-size: 6.7rem; line-height: 1.2; letter-spacing: -0.335rem; text-transform: uppercase; }
+
+.icon-line {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  white-space: nowrap;
+}
+
+/* Motion helpers: elements start hidden only when JS is running */
+.js [data-reveal] { opacity: 0; }
+.line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.line-mask > span { display: inline-block; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}

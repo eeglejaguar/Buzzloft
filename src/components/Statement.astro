@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import products from '../assets/inline-products.png';
+import leave from '../assets/inline-leave.png';
+import businesses from '../assets/inline-businesses.png';
+---
+
+<section class="statement" data-nav-theme="dark-text" aria-label="What we do">
+  <h2 class="sr-only">We design to make brands clearer, products easier to use, websites harder to leave and businesses easier to choose.</h2>
+  <div class="statement__rows" aria-hidden="true">
+    <div class="row h-67" data-statement-row>
+      <span>We design to make brands</span>
+      <span class="media media--hourglass" data-pop><img src="/assets/hourglass-lg.svg" width="62" height="64" alt="" /></span>
+      <span>Clearer</span>
+    </div>
+    <div class="row h-67" data-statement-row>
+      <span>Products</span>
+      <span class="media media--products" data-pop>
+        <Image src={products} alt="" widths={[362, 543]} sizes="181px" />
+      </span>
+      <span>Easier to use</span>
+    </div>
+    <div class="row h-67" data-statement-row>
+      <span>Websites harder to</span>
+      <span class="media media--leave" data-pop>
+        <Image src={leave} alt="" widths={[434, 868]} sizes="434px" />
+      </span>
+      <span>Leave</span>
+    </div>
+    <div class="row h-67" data-statement-row>
+      <span>And</span>
+      <span class="media media--biz" data-pop>
+        <Image src={businesses} alt="" widths={[144, 288]} sizes="144px" />
+      </span>
+      <span>Businesses easier to choose.</span>
+    </div>
+  </div>
+  <hr class="statement__rule" />
+</section>
+
+<style>
+  .statement {
+    padding-top: 16rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .statement__rows { display: flex; flex-direction: column; align-items: center; }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    white-space: nowrap;
+  }
+  .row:nth-child(1) { height: 8rem; }
+  .row:nth-child(2) { height: 8.8rem; margin-top: 1.2rem; }
+  .row:nth-child(3) { height: 8.8rem; margin-top: 1.2rem; }
+  .row:nth-child(4) { height: 10.8rem; margin-top: 0.2rem; }
+
+  .media { position: relative; flex-shrink: 0; display: block; }
+  .media img, .media :global(img) { display: block; }
+
+  .media--hourglass { width: 6.2rem; height: 6.4rem; }
+  .media--hourglass img { width: 100%; height: 100%; }
+
+  .media--products { width: 18.1rem; height: 8.8rem; border-radius: 0.4rem; overflow: hidden; }
+  .media--products :global(img) { position: absolute; left: 0; top: -76.07%; width: 100%; height: 365.62%; }
+
+  /* Figma mask group: 98×88 window into a 434px image, masked by the paper-plane shape */
+  .media--leave {
+    width: 9.8036rem;
+    height: 8.8rem;
+    overflow: hidden;
+    mix-blend-mode: hard-light;
+    -webkit-mask: url('/assets/mask-leave.svg') no-repeat 0 0 / 100% 100%;
+    mask: url('/assets/mask-leave.svg') no-repeat 0 0 / 100% 100%;
+  }
+  .media--leave :global(img) {
+    position: absolute;
+    left: -27.813rem;
+    top: -10.3017rem;
+    width: 43.4461rem;
+    height: 43.4461rem;
+    object-fit: cover;
+  }
+
+  .media--biz { width: 14.4rem; height: 10.8rem; }
+  .media--biz :global(img) { width: 100%; height: 100%; }
+
+  .statement__rule {
+    width: calc(100% - 2 * var(--gutter));
+    height: 1px;
+    border: 0;
+    background: var(--line);
+    margin: 16rem 0 0;
+  }
+
+  @media (max-width: 1100px) {
+    .row { flex-wrap: wrap; justify-content: center; white-space: normal; height: auto !important; text-align: center; font-size: 5rem; letter-spacing: -0.2rem; }
+  }
+  @media (max-width: 700px) {
+    .statement { padding-top: 10rem; }
+    .row { font-size: 4.2rem; row-gap: 0.4rem; }
+    .statement__rule { margin-top: 10rem; }
+  }
+</style>

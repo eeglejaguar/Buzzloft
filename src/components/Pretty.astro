@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets';
+import bg from '../assets/pretty-bg.png';
+import avatar1 from '../assets/avatar-1.png';
+import avatar2 from '../assets/avatar-2.png';
+
+const quote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+const testimonials = [
+  { q: quote, name: 'Anel Radoncic', role: 'Profession', img: avatar1, crop: false },
+  { q: quote, name: 'Donovan Smith', role: 'Chef', img: avatar2, crop: true },
+  { q: quote, name: 'Donovan Smith', role: 'Chef', img: avatar2, crop: true },
+];
+---
+
+<section class="pretty" data-nav-theme="light-text">
+  <div class="pretty__bg" aria-hidden="true">
+    <div class="pretty__bg-move" data-parallax-bg>
+      <Image src={bg} alt="" widths={[820]} sizes="100vw" />
+    </div>
+    <div class="pretty__shade"></div>
+  </div>
+
+  <h2 class="pretty__title h-104">
+    <span class="icon-line" data-slide="left">
+      <span>Pretty</span>
+      <img src="/assets/pretty-union.svg" width="126" height="96" alt="" class="pretty__i1" data-spin />
+      <span>is nice.</span>
+    </span>
+    <span class="icon-line" data-slide="left">
+      <span>Effective</span>
+      <img src="/assets/effective-icon.svg" width="96" height="96" alt="" class="pretty__i2" data-spin />
+      <span>is better.</span>
+    </span>
+  </h2>
+
+  <div class="pretty__copy" data-reveal="up">
+    <p>We care about the pixels. We care even more about what they accomplish.</p>
+    <p>More clarity. More connection.<br />More customers. More growth.</p>
+  </div>
+
+  <hr class="pretty__rule" />
+
+  <h2 class="pretty__quote-title h-67" data-split-lines>
+    <span class="line-mask"><span>Don't take our word for it.</span></span>
+  </h2>
+
+  <div class="quotes" data-quotes>
+    <ul class="quotes__track" data-quotes-track>
+      {testimonials.map((t) => (
+        <li class="quote">
+          <p class="quote__text">{t.q}</p>
+          <div class="quote__who">
+            <span class:list={['quote__avatar', { 'quote__avatar--crop': t.crop }]}>
+              <Image src={t.img} alt={t.name} widths={[188, 376]} sizes="94px" />
+            </span>
+            <span class="quote__meta">
+              <span class="quote__name">{t.name}</span>
+              <span class="quote__role">{t.role}</span>
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .pretty {
+    position: relative;
+    padding: 16rem var(--gutter) 0;
+    color: var(--white);
+    isolation: isolate;
+  }
+  .pretty__bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 152.1rem;
+    overflow: hidden;
+    z-index: -1;
+  }
+  .pretty__bg-move { position: absolute; inset: -10% 0; will-change: transform; }
+  .pretty__bg-move :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .pretty__shade { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.1); }
+
+  .pretty__title { display: flex; flex-direction: column; }
+  .pretty__title .icon-line { height: 12.5rem; }
+  .pretty__i1 { width: 12.6rem; height: 9.6rem; }
+  .pretty__i2 { width: 9.6rem; height: 9.6rem; }
+
+  .pretty__copy {
+    width: 74.6rem;
+    margin: 8.3rem 0 0 107.8rem;
+    font-weight: 500;
+    font-size: 3.4rem;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 4.1rem;
+  }
+
+  .pretty__rule {
+    height: 1px;
+    border: 0;
+    margin: 25.9rem 0 0;
+    background: var(--white);
+  }
+
+  .pretty__quote-title { margin-top: 16rem; color: var(--white); width: 105.4rem; }
+
+  .quotes { margin: 3.2rem calc(-1 * var(--gutter)) 0; padding-left: var(--gutter); overflow: hidden; }
+  .quotes__track {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+    will-change: transform;
+  }
+  .quote {
+    width: 83rem;
+    height: 47.2rem;
+    padding: 6.4rem;
+    border-radius: 4rem;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .quote__text { font-weight: 500; font-size: 4.3rem; line-height: 1.2; color: var(--quote); }
+  .quote__who { display: flex; align-items: center; gap: 2.4rem; }
+  .quote__avatar {
+    position: relative;
+    width: 9.4rem;
+    height: 8rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .quote__avatar :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .quote__avatar--crop :global(img) {
+    position: absolute;
+    left: -22.14%;
+    top: -27.45%;
+    width: 125.53%;
+    height: 202.83%;
+  }
+  .quote__meta { display: flex; flex-direction: column; gap: 0.8rem; font-family: var(--font-display); font-weight: 600; }
+  .quote__name { font-size: 3.2rem; line-height: 4rem; color: var(--black); }
+  .quote__role { font-size: 2rem; line-height: 2.4rem; color: var(--pink); }
+
+  @media (max-width: 1100px) {
+    .pretty__title { font-size: 7rem; }
+    .pretty__title .icon-line { height: auto; }
+    .pretty__i1 { width: 8.4rem; height: 6.4rem; }
+    .pretty__i2 { width: 6.4rem; height: 6.4rem; }
+    .pretty__copy { width: auto; max-width: 70rem; margin: 8rem 0 0 auto; }
+    .pretty__rule { margin-top: 14rem; }
+    .pretty__quote-title { width: auto; margin-top: 10rem; }
+    .quotes { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-right: var(--gutter); }
+    .quotes::-webkit-scrollbar { display: none; }
+    .quote { scroll-snap-align: start; width: 70rem; height: 44rem; }
+  }
+  @media (max-width: 700px) {
+    .pretty__title { font-size: 5.4rem; }
+    .pretty__i1 { width: 6.3rem; height: 4.8rem; }
+    .pretty__i2 { width: 4.8rem; height: 4.8rem; }
+    .pretty__copy { font-size: 2.8rem; margin-left: 0; }
+    .pretty__quote-title { font-size: 5rem; }
+    .quote { width: 54rem; height: 50rem; padding: 4.4rem; }
+    .quote__text { font-size: 3.4rem; }
+  }
+</style>

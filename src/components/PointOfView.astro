@@ -1,0 +1,241 @@
+---
+import { Image } from 'astro:assets';
+import eye from '../assets/pov-eye.png';
+import grain from '../assets/texture-grain.png';
+
+const services = [
+  { n: '01 /', t: 'Brand Strategy', d: "Find your place. Own your space. We help brands figure out who they are, who they're for, and why they matter." },
+  { n: '02 /', t: 'Brand Identity', d: "Look like you've got somewhere to be. Distinctive identities built to get noticed and remembered." },
+  { n: '03 /', t: 'Web Design', d: 'Your website called. It wants to do more. Digital experiences that look good, feel intuitive, and get results.' },
+  { n: '04 /', t: 'Web Develop­ment', d: 'All the looks. All the functionality. Websites built to perform, not just impress.' },
+  { n: '05 /', t: 'Product Design', d: 'Make complicated things feel simple. We design digital products people actually enjoy using.' },
+  { n: '06 /', t: 'Creative Campaigns', d: 'Have something to say? Make it worth hearing. Big ideas and creative that cut through the noise.' },
+  { n: '07 /', t: 'Social & Content', d: 'Stop posting. Start saying something. Content that gives your brand a voice and a reason to be followed.' },
+];
+---
+
+<section class="pov" id="about" data-nav-theme="light-text">
+  <div class="pov__labels label" data-reveal="fade">
+    <span>Point</span><span>of</span><span>view</span>
+  </div>
+
+  <h2 class="pov__lines h-104">
+    <span class="pov__line pov__line--1" data-slide="left">Business has changed.</span>
+    <span class="pov__line pov__line--2" data-slide="right">Your brand should</span>
+    <span class="pov__line pov__line--3" data-slide="right">get the memo.</span>
+  </h2>
+
+  <div class="pov__eye" data-eye aria-hidden="true">
+    <Image src={eye} alt="" widths={[672, 1344]} sizes="672px" />
+  </div>
+
+  <div class="pov__foot">
+    <p class="pov__copy" data-reveal="up">We're bringing fresh thinking to serious business. Challenging the usual, questioning the obvious, and making room for better ideas.</p>
+    <div class="pov__tags label" data-reveal="up">
+      <span>New perspective.</span>
+      <span>Better possibilities.</span>
+    </div>
+  </div>
+
+  <img class="pov__fade" src="/assets/ellipse-wave.svg" alt="" aria-hidden="true" />
+
+  <div class="services" id="services" data-services>
+    <div class="services__bg" aria-hidden="true">
+      <Image src={grain} alt="" widths={[1200, 2000]} sizes="100vw" class="services__grain" />
+    </div>
+
+    <h2 class="services__title h-67">
+      <span class="icon-line" data-reveal="up">
+        <span>Big ideas.</span>
+        <img src="/assets/union-a.svg" width="73" height="72" alt="" class="services__icon" data-spin />
+        <span>Different disciplines.</span>
+      </span>
+      <span class="icon-line" data-reveal="up">
+        <img src="/assets/union-b.svg" width="72" height="72" alt="" class="services__icon" data-spin />
+        <span>One creative partner.</span>
+      </span>
+    </h2>
+
+    <div class="services__blob" data-services-blob>
+      <img class="services__mithosis" src="/assets/mithosis-bg.svg" width="1668" height="952" alt="" aria-hidden="true" />
+      <ul class="services__track" data-services-track>
+        {services.map((s) => (
+          <li class="svc">
+            <p class="svc__title"><em>{s.n}</em> {s.t}</p>
+            <p class="svc__desc">{s.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pov {
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+    padding: 4rem var(--gutter) 0;
+    isolation: isolate;
+  }
+
+  .pov__labels { display: flex; justify-content: space-between; }
+
+  .pov__lines {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    margin-top: 14.4rem;
+    mix-blend-mode: difference;
+    color: var(--white);
+  }
+  .pov__line { display: block; white-space: nowrap; height: 12.5rem; }
+  .pov__line--1 { justify-self: end; }
+  .pov__line--2, .pov__line--3 { justify-self: end; margin-right: 68.9rem; }
+
+  .pov__eye {
+    position: absolute;
+    left: 119.9rem;
+    top: 30.2rem;
+    width: 67.2rem;
+    height: 38.3rem;
+    mix-blend-mode: exclusion;
+    z-index: 1;
+    will-change: transform;
+  }
+  .pov__eye :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .pov__foot {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 12rem;
+  }
+  .pov__copy {
+    width: 59.2rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    opacity: 0.6;
+  }
+  .pov__tags { width: 59.2rem; display: flex; justify-content: space-between; margin-top: 2.8rem; }
+
+  /* Soft paper-coloured glow that dissolves the black into the next section */
+  .pov__fade {
+    position: absolute;
+    left: calc(50% + 0.25rem);
+    top: 181.7rem;
+    width: calc(371.9rem * 1.0716);
+    height: calc(149.2rem * 1.1786);
+    transform: translate(-50%, -7.58%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ---------- Services card ---------- */
+  .services {
+    position: relative;
+    z-index: 3;
+    margin-top: 16rem;
+    height: 131.8rem;
+    border-radius: 8rem;
+    overflow: hidden;
+    background: var(--pink);
+    isolation: isolate;
+  }
+  .services__bg { position: absolute; inset: 0; mix-blend-mode: soft-light; overflow: hidden; z-index: -1; }
+  .services__bg :global(.services__grain) {
+    position: absolute;
+    left: -10.03%;
+    top: -48.22%;
+    width: 110.03%;
+    height: 203.03%;
+    object-fit: cover;
+  }
+
+  .services__title {
+    position: absolute;
+    left: 8rem;
+    top: 8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    color: var(--white);
+  }
+  .services__title .icon-line { gap: 2rem; height: 8rem; }
+  .services__icon { width: auto; height: 7.2rem; }
+
+  .services__blob {
+    position: absolute;
+    left: 6.8rem;
+    top: 28.6rem;
+    width: 166.8rem;
+    height: 95.2rem;
+    border-radius: 46.4rem;
+    overflow: clip;
+  }
+  .services__mithosis { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .services__track {
+    position: absolute;
+    left: 8.6rem;
+    top: 23.6rem;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    will-change: transform;
+  }
+  .svc {
+    flex-shrink: 0;
+    width: 45rem;
+    height: 48rem;
+    padding: 5.6rem;
+    border-radius: 4rem;
+    background: var(--white);
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .svc:hover { transform: translateY(-1.6rem) rotate(-1deg); }
+  .svc__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 5.3rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    hyphens: manual;
+  }
+  .svc__title em { font-style: italic; font-weight: 400; }
+  .svc__desc { font-weight: 500; font-size: 1.8rem; line-height: 2.2rem; opacity: 0.6; }
+
+  @media (max-width: 1100px) {
+    .pov__line { height: auto; white-space: normal; }
+    .pov__lines { font-size: 7.6rem; }
+    .pov__line--2, .pov__line--3 { justify-self: start; margin-right: 0; }
+    .pov__eye { left: auto; right: var(--gutter); top: 40rem; width: 40rem; height: 23rem; }
+    .pov__foot { flex-direction: column; gap: 4rem; margin-top: 20rem; }
+    .pov__copy, .pov__tags { width: 100%; max-width: 60rem; }
+    .services { height: auto; padding: 8rem 0 8rem; border-radius: 5rem; }
+    .services__title { position: static; padding: 0 5rem; font-size: 5rem; }
+    .services__title .icon-line { height: auto; flex-wrap: wrap; }
+    .services__blob { position: relative; left: 0; top: 0; width: 100%; height: auto; margin-top: 6rem; border-radius: 0; overflow: visible; }
+    .services__mithosis { display: none; }
+    .services__track { position: relative; left: 0; top: 0; padding: 0 5rem; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .services__track::-webkit-scrollbar { display: none; }
+    .svc { scroll-snap-align: start; width: 42rem; }
+  }
+  @media (max-width: 700px) {
+    .pov__lines { font-size: 5.2rem; margin-top: 10rem; }
+    .pov__eye { top: 34rem; width: 30rem; height: 17rem; }
+    .services__title { font-size: 4.2rem; padding: 0 3rem; }
+    .services__icon { height: 4.8rem; }
+    .services__track { padding: 0 3rem; }
+    .svc { width: 48rem; height: 52rem; padding: 4.4rem; }
+    .svc__title { font-size: 4.8rem; }
+    .svc__desc { font-size: 2.2rem; line-height: 1.35; }
+  }
+</style>

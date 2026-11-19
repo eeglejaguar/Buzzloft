@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import pill from '../assets/cta-pill.png';
+import SayHello from './SayHello.astro';
+---
+
+<section class="cta" id="contact" data-nav-theme="dark-text">
+  <span class="cta__flower cta__flower--l" aria-hidden="true" data-flower><img src="/assets/flower-big.svg" alt="" /></span>
+  <span class="cta__flower cta__flower--r" aria-hidden="true" data-flower><img src="/assets/flower-big.svg" alt="" /></span>
+
+  <h2 class="cta__title h-104">
+    <span class="icon-line cta__l1" data-slide="left">
+      <span>Got a</span>
+      <img src="/assets/got-5dots.svg" width="99" height="96" alt="" class="cta__i1" data-spin />
+      <span>business?</span>
+    </span>
+    <span class="icon-line cta__l2" data-slide="right">
+      <span>We've got</span>
+      <img src="/assets/ideas-flower.svg" width="87" height="96" alt="" class="cta__i2" data-spin />
+      <span>ideas.</span>
+    </span>
+  </h2>
+
+  <a href="mailto:hello@buzzloft.com" class="cta__pill" data-magnetic aria-label="Say hello — email Buzz Loft">
+    <span class="cta__pill-bg" data-magnetic-bg>
+      <Image src={pill} alt="" widths={[1054, 2108]} sizes="(max-width: 1100px) 90vw, 55vw" />
+    </span>
+    <span class="cta__pill-text" data-magnetic-text><SayHello size="lg" /></span>
+  </a>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    height: 158.5rem;
+    padding-top: 16rem;
+  }
+  .cta__title { display: flex; flex-direction: column; position: relative; z-index: 1; }
+  .cta__title .icon-line { height: 12.5rem; }
+  .cta__l1 { margin-left: calc(8.33% + 2.1rem); }
+  .cta__l2 { margin-left: calc(33.33% + 0.3rem); }
+  .cta__i1 { width: 9.9rem; height: 9.6rem; }
+  .cta__i2 { width: 8.7rem; height: 9.6rem; }
+
+  .cta__pill {
+    position: absolute;
+    left: calc(16.67% + 11.3rem);
+    top: 49rem;
+    width: 105.4rem;
+    height: 35.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .cta__pill-bg { position: absolute; inset: 0; will-change: transform; }
+  .cta__pill-bg :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .cta__pill-text { position: relative; will-change: transform; }
+
+  .cta__flower {
+    position: absolute;
+    top: 71rem;
+    width: 67rem;
+    height: 74.4rem;
+    pointer-events: none;
+  }
+  .cta__flower img { position: absolute; left: -1.7%; top: -1.3%; width: 103.01%; height: 102.49%; }
+  .cta__flower--l { left: -33.9rem; }
+  .cta__flower--r { right: -33.8rem; }
+
+  @media (max-width: 1100px) {
+    .cta { height: auto; padding: 14rem var(--gutter) 30rem; }
+    .cta__title { font-size: 7rem; }
+    .cta__title .icon-line { height: auto; }
+    .cta__l1 { margin-left: 0; }
+    .cta__l2 { margin-left: 8rem; }
+    .cta__i1, .cta__i2 { height: 6.4rem; width: auto; }
+    .cta__pill { position: relative; left: auto; top: auto; margin: 8rem auto 0; width: 100%; max-width: 90rem; height: auto; aspect-ratio: 1054 / 352; }
+    .cta__flower { top: auto; bottom: -10rem; width: 40rem; height: 44.4rem; }
+    .cta__flower--l { left: -20rem; }
+    .cta__flower--r { right: -20rem; }
+  }
+  @media (max-width: 700px) {
+    .cta__title { font-size: 5.4rem; }
+    .cta__l2 { margin-left: 0; }
+    .cta__i1, .cta__i2 { height: 4.8rem; }
+    .cta__pill :global(.say--lg .say__inner) { font-size: 4.8rem; }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import { getImage } from 'astro:assets';
+import phoneSrc from '../assets/phone.png';
+const phone = await getImage({ src: phoneSrc, width: 400, format: 'webp' });
+/** "Say ☎ hello" lockup. `sm` = nav pill button, `lg` = big CTA text. */
+interface Props {
+  size?: 'sm' | 'lg';
+}
+const { size = 'sm' } = Astro.props;
+---
+
+<span class:list={['say', `say--${size}`]}>
+  <span class="say__inner">
+    <span class="say__word">Say</span>
+    <span class="say__phone" aria-hidden="true">
+      <span class="say__rot">
+        <span class="say__crop">
+          <img src={phone.src} alt="" decoding="async" />
+        </span>
+      </span>
+    </span>
+    <span class="say__word">hello</span>
+  </span>
+</span>
+
+<style>
+  .say {
+    display: inline-flex;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  .say__inner { display: flex; align-items: center; }
+  .say__phone { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .say__rot { transform: rotate(-105deg) scaleY(-1); flex: none; }
+  .say__crop { position: relative; display: block; overflow: hidden; }
+  .say__crop img {
+    position: absolute;
+    left: 0;
+    top: -13.1%;
+    width: 296.56%;
+    height: 173.8%;
+  }
+
+  /* Nav pill */
+  .say--sm {
+    width: 100%;
+    justify-content: center;
+    padding: 2rem 4rem;
+    border-radius: 999px;
+    background: var(--white);
+    transition: background 0.4s ease, color 0.4s ease, transform 0.4s var(--ease-out);
+  }
+  .say--sm .say__inner { height: 2.4rem; font-size: 1.4rem; line-height: 2rem; }
+  .say--sm .say__phone { width: 3.819rem; height: 3.5455rem; }
+  .say--sm .say__crop { width: 2.8131rem; height: 3.2rem; }
+
+  /* Big CTA */
+  .say--lg .say__inner { height: 10.0552rem; font-size: 6.7rem; line-height: 1.2; }
+  .say--lg .say__phone { width: 16.0006rem; height: 14.8543rem; }
+  .say--lg .say__crop { width: 11.786rem; height: 13.407rem; }
+
+  :global(a:hover) > .say--sm { transform: scale(1.04); }
+  :global(a:hover) .say__rot { animation: ring 0.5s ease-in-out 2; }
+
+  @keyframes ring {
+    0%, 100% { transform: rotate(-105deg) scaleY(-1); }
+    25% { transform: rotate(-90deg) scaleY(-1); }
+    75% { transform: rotate(-120deg) scaleY(-1); }
+  }
+
+  @media (max-width: 700px) {
+    .say--sm { padding: 1.4rem 2.4rem; }
+    .say--sm .say__inner { font-size: 1.8rem; }
+  }
+</style>

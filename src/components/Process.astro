@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import wave from '../assets/process-wave.png';
+
+const steps = [
+  { n: '01', t: 'Discover', d: 'Understand the problem before jumping to the solution.', icon: '/assets/process-01.svg', w: 56, h: 56, gap: 20 },
+  { n: '02', t: 'Define', d: 'Find the big idea and give it direction.', icon: '/assets/process-02.svg', w: 66, h: 64, gap: 16 },
+  { n: '03', t: 'Create', d: 'Turn good thinking into great work.', icon: '/assets/process-03.svg', w: 64, h: 64, gap: 16 },
+  { n: '04', t: 'Deliver', d: 'Put it out there and make it count.', icon: '/assets/process-04.svg', w: 64, h: 64, gap: 16 },
+];
+---
+
+<section class="process" data-nav-theme="dark-text" data-process>
+  <div class="process__head">
+    <h2 class="h-67 process__title" data-split-lines>
+      <span class="line-mask"><span>Good work doesn't</span></span>
+      <span class="line-mask"><span>happen by accident.</span></span>
+    </h2>
+    <p class="process__intro" data-reveal="up">A little curiosity, a lot of thinking, and a process that gets good ideas where they need to go.</p>
+  </div>
+
+  <div class="process__wave" data-wave aria-hidden="true">
+    <Image src={wave} alt="" widths={[960, 1920]} sizes="100vw" />
+  </div>
+
+  <ol class="process__steps">
+    {steps.map((s, i) => (
+      <li class:list={['step', `step--${i + 1}`]} data-step>
+        <p class="step__head" style={`gap:${s.gap / 10}rem`}>
+          <em>{s.n}</em>
+          <img src={s.icon} width={s.w} height={s.h} alt="" style={`width:${s.w / 10}rem;height:${s.h / 10}rem`} data-spin />
+          <span>{s.t}</span>
+        </p>
+        <p class="step__desc">{s.d}</p>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .process {
+    position: relative;
+    height: 256rem;
+    padding: 16rem var(--gutter) 0;
+  }
+  .process__head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 89.9rem 59.2rem;
+    justify-content: space-between;
+    margin-right: 15.4rem;
+  }
+  .process__intro {
+    margin-top: 10rem;
+    font-weight: 500;
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+    opacity: 0.6;
+  }
+
+  .process__wave {
+    position: absolute;
+    left: 0;
+    top: 60.1rem;
+    width: 100%;
+    height: 179.9rem;
+    pointer-events: none;
+    will-change: clip-path;
+  }
+  .process__wave :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .process__steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    position: absolute;
+    z-index: 2;
+    width: 74.6rem;
+    height: 42rem;
+    padding: 6.4rem;
+    border-radius: 2rem;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .step--1 { left: calc(8.33% + 4.2rem); top: 40rem; }
+  .step--2 { left: calc(50% + 1.2rem); top: 88.4rem; }
+  .step--3 { left: calc(8.33% + 4.2rem); top: 136.8rem; }
+  .step--4 { left: calc(50% + 1.2rem); top: 185.2rem; }
+
+  .step__head {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 8.3rem;
+    line-height: 1.2;
+    letter-spacing: -0.415rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .step__head em { font-style: italic; font-weight: 400; }
+  .step__desc { font-weight: 500; font-size: 2.2rem; line-height: 2.4rem; opacity: 0.6; }
+
+  @media (max-width: 1100px) {
+    .process { height: auto; padding-bottom: 12rem; }
+    .process__head { grid-template-columns: 1fr; margin-right: 0; row-gap: 3rem; }
+    .process__intro { margin-top: 0; max-width: 60rem; }
+    .process__wave { top: 50rem; height: calc(100% - 50rem); }
+    .process__steps { display: flex; flex-direction: column; gap: 6rem; margin-top: 10rem; }
+    .step { position: relative; left: auto !important; top: auto !important; width: min(74.6rem, 100%); height: 34rem; }
+    .step:nth-child(even) { align-self: flex-end; }
+  }
+  @media (max-width: 700px) {
+    .process__title { font-size: 5rem; }
+    .step { height: 30rem; padding: 4.4rem; }
+    .step__head { font-size: 6rem; }
+  }
+</style>

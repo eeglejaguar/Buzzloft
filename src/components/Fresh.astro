@@ -1,0 +1,53 @@
+---
+---
+
+<section class="fresh" data-nav-theme="dark-text">
+  <h2 class="fresh__title h-104">
+    <span class="icon-line fresh__l1" data-slide="left">
+      <span>Fresh</span>
+      <img src="/assets/fresh-icon.svg" width="96" height="96" alt="" data-spin />
+      <span>thinking.</span>
+    </span>
+    <span class="icon-line fresh__l2" data-slide="right">
+      <span>Serious</span>
+      <img src="/assets/serious-icon.svg" width="96" height="96" alt="" data-spin />
+      <span>business.</span>
+    </span>
+  </h2>
+  <p class="fresh__copy" data-reveal="up">We bring a new-generation perspective to businesses ready for what's next. Less doing things because they've always been done that way. More doing things because they make sense.</p>
+</section>
+
+<style>
+  .fresh { position: relative; height: 72.6rem; }
+  .fresh__title { display: flex; flex-direction: column; }
+  .fresh__title img { width: 9.6rem; height: 9.6rem; flex-shrink: 0; }
+  .fresh__title .icon-line { height: 12.5rem; }
+  .fresh__l1 { margin-left: calc(8.33% + 2.1rem); }
+  .fresh__l2 { margin-left: calc(33.33% + 0.3rem); }
+  .fresh__copy {
+    position: absolute;
+    left: calc(45.83% - 52.4rem);
+    top: 41rem;
+    width: 105.4rem;
+    font-weight: 500;
+    font-size: 3.4rem;
+    line-height: 1.2;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 1100px) {
+    .fresh { height: auto; padding: 4rem var(--gutter) 14rem; }
+    .fresh__title { font-size: 7rem; }
+    .fresh__title img { width: 6.4rem; height: 6.4rem; }
+    .fresh__title .icon-line { height: auto; }
+    .fresh__l1 { margin-left: 0; }
+    .fresh__l2 { margin-left: 8rem; }
+    .fresh__copy { position: static; width: auto; max-width: 80rem; margin-top: 8rem; }
+  }
+  @media (max-width: 700px) {
+    .fresh__title { font-size: 5.4rem; }
+    .fresh__title img { width: 4.8rem; height: 4.8rem; }
+    .fresh__l2 { margin-left: 0; }
+    .fresh__copy { font-size: 2.8rem; }
+  }
+</style>

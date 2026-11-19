@@ -1,0 +1,107 @@
+---
+import SayHello from './SayHello.astro';
+
+const links = [
+  { label: 'Work', href: '#work', icon: '/assets/icon-5dots.svg', w: 12, h: 12 },
+  { label: 'Services', href: '#services', icon: '/assets/icon-flower.svg', w: 10, h: 12 },
+  { label: 'About', href: '#about', icon: '/assets/icon-hourglass.svg', w: 12, h: 12 },
+  { label: 'Contact', href: '#contact', icon: '/assets/icon-softflower.svg', w: 12, h: 12 },
+];
+---
+
+<header class="nav" data-nav>
+  <a href="#top" class="nav__logo" aria-label="Buzz Loft home">
+    <img src="/assets/logo-white.svg" width="64" height="64" alt="" />
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    {links.map((l) => (
+      <a href={l.href} class="nav__link">
+        <img src={l.icon} width={l.w} height={l.h} alt="" class="nav__icon" />
+        <span>{l.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <a href="#contact" class="nav__cta">
+    <SayHello size="sm" />
+  </a>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    height: 11.2rem;
+    padding: 2.4rem var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--white);
+    transition: transform 0.6s var(--ease-out), color 0.4s ease;
+  }
+  .nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.01);
+    backdrop-filter: blur(0);
+    z-index: -1;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  }
+  .nav.is-scrolled::before { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.04); }
+  .nav.is-hidden { transform: translateY(-100%); }
+
+  .nav__logo { width: 19.2rem; height: 6.4rem; }
+  .nav__logo img { width: 6.4rem; height: 6.4rem; transition: filter 0.4s ease; }
+
+  .nav__links {
+    width: 59.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    left: 1.8rem;
+    right: 0;
+    bottom: -0.4rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .nav__link:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav__icon { width: auto; height: 1.2rem; transition: transform 0.6s var(--ease-out), filter 0.4s ease; }
+  .nav__link:hover .nav__icon { transform: rotate(180deg); }
+
+  .nav__cta { width: 19.2rem; display: block; }
+
+  /* Dark variant when over light sections */
+  .nav.is-dark { color: var(--black); }
+  .nav.is-dark .nav__logo img { filter: brightness(0) saturate(100%) invert(9%); }
+  .nav.is-dark .nav__icon { filter: brightness(0); }
+  .nav.is-dark .nav__cta :global(.say) { background: var(--black); color: var(--white); }
+
+  @media (max-width: 700px) {
+    .nav { height: 8rem; }
+    .nav__links { display: none; }
+    .nav__logo { width: auto; height: 4.4rem; }
+    .nav__logo img { width: 4.4rem; height: 4.4rem; }
+    .nav__cta { width: auto; }
+  }
+</style>
